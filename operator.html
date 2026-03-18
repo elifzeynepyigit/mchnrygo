@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KepçeKapımda | Operatör Paneli</title>
+    <style>
+        :root { --primary: #ffcc00; --dark: #1a1a1a; --success: #2ecc71; --danger: #e74c3c; }
+        body { margin: 0; font-family: 'Segoe UI', sans-serif; background: var(--dark); color: white; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+        
+        .panel { background: #262626; width: 90%; max-width: 400px; padding: 2rem; border-radius: 30px; border: 2px solid #333; box-shadow: 0 15px 35px rgba(0,0,0,0.5); text-align: center; }
+        
+        .header { margin-bottom: 2rem; }
+        .header h1 { color: var(--primary); margin: 0; font-size: 1.5rem; text-transform: uppercase; letter-spacing: 2px; }
+        
+        .status-badge { display: inline-block; padding: 10px 25px; border-radius: 50px; font-weight: bold; font-size: 1.2rem; margin-bottom: 2rem; transition: 0.3s; }
+        .available { background: rgba(46, 204, 113, 0.2); color: var(--success); border: 1px solid var(--success); }
+        .busy { background: rgba(231, 76, 60, 0.2); color: var(--danger); border: 1px solid var(--danger); }
+        
+        .stats { display: flex; justify-content: space-around; background: #1a1a1a; padding: 15px; border-radius: 20px; margin-bottom: 2rem; }
+        .stat-item span { display: block; font-size: 0.7rem; color: #888; text-transform: uppercase; }
+        .stat-item strong { font-size: 1.2rem; color: var(--primary); }
+
+        .actions { display: grid; gap: 15px; }
+        button { padding: 15px; border: none; border-radius: 15px; font-size: 1rem; font-weight: bold; cursor: pointer; transition: 0.3s; color: white; }
+        .btn-go { background: var(--success); }
+        .btn-stop { background: var(--danger); }
+        button:hover { transform: scale(1.02); opacity: 0.9; }
+        
+        .footer { margin-top: 2rem; font-size: 0.8rem; color: #555; }
+    </style>
+</head>
+<body>
+
+<div class="panel">
+    <div class="header">
+        <h1>KEPÇEKAPIMDA 🚜</h1>
+        <p style="color: #888;">Operatör Kontrol Merkezi</p>
+    </div>
+
+    <div id="statusDisplay" class="status-badge available">MÜSAİT</div>
+
+    <div class="stats">
+        <div class="stat-item"><span>Günlük Kazanç</span><strong id="earnings">0 TL</strong></div>
+        <div class="stat-item"><span>Çalışma</span><strong id="hours">0 Saat</strong></div>
+    </div>
+
+    <div class="actions">
+        <button class="btn-go" onclick="updateStatus(true)">İŞE BAŞLA (MÜSAİT)</button>
+        <button class="btn-stop" onclick="updateStatus(false)">İŞİ BİTİR (MEŞGUL)</button>
+    </div>
+
+    <div class="footer">
+        © 2026 KepçeKapımda | Saha Takip Sistemi
+    </div>
+</div>
+
+<script>
+    let isAvailable = true;
+    let totalEarnings = 0;
+    let totalHours = 0;
+
+    function updateStatus(status) {
+        const display = document.getElementById('statusDisplay');
+        isAvailable = status;
+
+        if (isAvailable) {
+            display.innerText = "MÜSAİT";
+            display.className = "status-badge available";
+            alert("Sistem güncellendi: Artık yeni iş talepleri alabilirsiniz!");
+        } else {
+            display.innerText = "MEŞGUL";
+            display.className = "status-badge busy";
+            // Demo amaçlı: Her iş bitişinde 5 saat ve 6000 TL ekleyelim
+            totalHours += 5;
+            totalEarnings += 6000;
+            document.getElementById('hours').innerText = totalHours + " Saat";
+            document.getElementById('earnings').innerText = totalEarnings + " TL";
+            alert("İş tamamlandı! Kazancınız hesabınıza yansıtıldı.");
+        }
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KepçeKapımda | Makine Kirala</title>
+    <style>
+        :root { --main: #ffb400; --bg: #f4f7f6; --card: #ffffff; --text: #333; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; }
+        
+        .header { text-align: center; margin-bottom: 30px; }
+        .header h1 { color: #222; margin-bottom: 5px; }
+        .header p { color: #666; font-size: 0.9rem; }
+
+        .search-bar { max-width: 600px; margin: 0 auto 30px; display: flex; gap: 10px; }
+        input { flex: 1; padding: 12px; border: 1px solid #ddd; border-radius: 8px; outline: none; }
+        
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; max-width: 1000px; margin: 0 auto; }
+        
+        .machine-card { background: var(--card); border-radius: 15px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05); transition: 0.3s; border: 1px solid #eee; }
+        .machine-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        
+        .card-img { height: 150px; background: #eee; display: flex; align-items: center; justify-content: center; font-size: 3rem; }
+        
+        .card-content { padding: 20px; }
+        .card-content h3 { margin: 0 0 10px; font-size: 1.2rem; }
+        .info { font-size: 0.85rem; color: #777; margin-bottom: 15px; }
+        .price { font-size: 1.3rem; font-weight: bold; color: #222; }
+        .price span { font-size: 0.8rem; color: #999; }
+
+        .btn-rent { width: 100%; padding: 12px; background: var(--main); border: none; border-radius: 8px; font-weight: bold; cursor: pointer; margin-top: 15px; transition: 0.2s; }
+        .btn-rent:hover { background: #e5a100; }
+        
+        .badge { background: #e8f5e9; color: #2e7d32; padding: 4px 8px; border-radius: 4px; font-size: 0.7rem; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1>İş Makinesi Kirala 🚜</h1>
+    <p>Konumuna en yakın, onaylı operatörleri listeliyoruz.</p>
+</div>
+
+<div class="search-bar">
+    <input type="text" placeholder="Şehir veya Makine Türü Ara (Örn: Ekskavatör)...">
+</div>
+
+<div class="grid" id="machineGrid">
+    </div>
+
+<script>
+    const machines = [
+        { id: 1, type: "Ekskavatör", name: "CAT 320 GC", owner: "Ahmet Y. (12 yıllık tecrübe)", price: 1500, emoji: "🏗️", rating: "⭐ 4.9" },
+        { id: 2, type: "Beko Loder", name: "JCB 3CX", owner: "Mehmet T. (Garantili İşçilik)", price: 1200, emoji: "🚜", rating: "⭐ 4.7" },
+        { id: 3, type: "Mini Kepçe", name: "Bobcat S450", owner: "Can S. (Dar Alan Uzmanı)", price: 900, emoji: "🚜", rating: "⭐ 5.0" }
+    ];
+
+    const grid = document.getElementById('machineGrid');
+
+    machines.forEach(m => {
+        grid.innerHTML += `
+            <div class="machine-card">
+                <div class="card-img">${m.emoji}</div>
+                <div class="card-content">
+                    <div style="display:flex; justify-content:space-between; align-items:center;">
+                        <span class="badge">${m.type}</span>
+                        <span style="font-size:0.8rem; color:#f39c12;">${m.rating}</span>
+                    </div>
+                    <h3>${m.name}</h3>
+                    <div class="info">Operatör: ${m.owner}</div>
+                    <div class="price">${m.price} TL <span>/ saat</span></div>
+                    <button class="btn-rent" onclick="rent('${m.name}')">ŞİMDİ KİRALA</button>
+                </div>
+            </div>
+        `;
+    });
+
+    function rent(name) {
+        alert(name + " için kiralama talebiniz operatöre iletildi! Operatör onayladığında SMS alacaksınız.");
+    }
+</script>
+
+</body>
+</html>
